@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import schema from './schema'
 import * as yup from 'yup';
@@ -10,16 +10,12 @@ function Form () {
         toppings: false,
         instructions: ''
     })
-    // const [disabled, setDisabled] = useState(true)
     const[errors, setErrors] = useState({
         pizzaName: '',
         size: '',
         toppings: false,
         instructions: ''
     })
-    // useEffect(() => {
-    //     schema.isValid(formValues).then(valid => setDisabled(!valid))
-    // }, [formValues])
 
     const setFormErrors = (name, value) => {
         yup.reach(schema, name).validate(value)
@@ -32,16 +28,25 @@ function Form () {
         const valueToUse = type === "checkbox" ? checked : value
         setFormErrors(name, valueToUse)
         setFormValues({ ...formValues, [name]: valueToUse})
-        // setFormValues({
-        //     ...formValues, 
-        //     [evt.target.name]: evt.target.value
-        // })
     }
     
     const onSubmit = evt => {
         evt.preventDefault();
-        axios.post("https://reqres.in/api/orders", { formValues })
-            .then(res => console.log(res))
+        const newFormValues = {
+            pizzaName: formValues.pizzaName.trim(),
+            size: formValues.size.trim(),
+            toppings: formValues.toppings,
+            instructions: formValues.instructions.trim()
+        };
+        axios.post("https://reqres.in/api/orders", { newFormValues })
+            .then(res => {
+                setFormValues({
+                    pizzaName: '',
+                    size: '',
+                    toppings: false,
+                    instructions: ''
+                })
+            })
             .catch(err => console.error(err))
     } 
     return(

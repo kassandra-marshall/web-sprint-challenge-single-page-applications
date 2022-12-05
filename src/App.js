@@ -6,8 +6,11 @@ import Form from './Form'
 const App = () => {
   return (
     <>
+    <header>
       <h1>Lambda Eats</h1>
       <Link to="/">Home</Link>
+    </header>
+    
       
 
       <Route exact path="/">
