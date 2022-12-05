@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import schema from './schema'
 import * as yup from 'yup';
+import pizza from './Pizza.jpg'
 
 function Form () {
     const [formValues, setFormValues] = useState({
@@ -54,40 +55,46 @@ function Form () {
             <div style={{color: "red"}}>
                 <div>{errors.pizzaName}</div>
             </div>
-            <label>Name: 
-                <input
-                    id="name-input"
-                    name="pizzaName"
-                    type="text"
-                    value={formValues.pizzaName}
-                    onChange={onChange}
-                />
-            </label>
-            <label>Size: 
-            <select id="size-dropdown" name= "size" value={formValues.size} onChange={onChange}>
-                    <option>--Select a Size--</option>
-                    <option name="small">Small</option>
-                    <option name="medium">Medium</option>
-                    <option name="large">Large</option>    
-                </select> 
-            </label>
-            <label>Toppings:</label>
-            <label>
-                Pepperoni <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
-            </label>
-            <label>
-                Sausage <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
-            </label>
-            <label>
-                Extra Cheese <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
-            </label>
-            <label>
-                Veggies <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
-            </label>
-            <label>Special Instructions:
-                <input id="special-text" type="text" name="instructions" value={formValues.instructions} onChange={onChange}/>
-            </label>
-            <input id="order-button" type="submit" value="Add To Order" />
+            <header>
+                <img src={pizza}></img>
+            </header>
+            <h1>Build Your Own Pizza</h1>
+            <div className="Form-Container">
+                <label className="Name">Enter Your Name: 
+                    <input
+                        id="name-input"
+                        name="pizzaName"
+                        type="text"
+                        value={formValues.pizzaName}
+                        onChange={onChange}
+                    />
+                </label>
+                <label className="Size-Container"> Select Your Size: 
+                <select id="size-dropdown" name= "size" value={formValues.size} onChange={onChange}>
+                        <option>--Select a Size--</option>
+                        <option name="small">Small</option>
+                        <option name="medium">Medium</option>
+                        <option name="large">Large</option>    
+                    </select> 
+                </label>
+                <label className="Toppings">Select Your Toppings:</label>
+                <label>
+                    Pepperoni <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
+                </label>
+                <label>
+                    Sausage <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
+                </label>
+                <label>
+                    Extra Cheese <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
+                </label>
+                <label>
+                    Veggies <input type="checkbox" name="toppings" value={formValues.toppings} onChange={onChange}/>
+                </label>
+                <label className="Instructions">Special Instructions:
+                    <input id="special-text" type="text" name="instructions" value={formValues.instructions} onChange={onChange}/>
+                </label>
+                <input id="order-button" type="submit" value="Add To Order" />
+            </div>
         </form>
     )
 }
